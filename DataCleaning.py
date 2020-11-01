@@ -71,9 +71,10 @@ for i in range(0,len(df)):
 #calculate number of days from deadline and launched       
 duration = []
 for i in range(0,len(df)):
-    delta = int((df['deadline'][0]-df['launched_at'][0])/(60*60*24))
+    delta = round((combined_csv['deadline'][i]-combined_csv['launched_at'][i])/(60*60*24))
     duration.append(delta)
     
+
 #conver the days from unix epoch to YYYY-MM-DD format (UTC)
 for i in range(0,len(df)):
     df['deadline'][i]= datetime.datetime.utcfromtimestamp(df['deadline'][i]).strftime('%Y-%m-%d %H:%M:%S')
@@ -105,4 +106,3 @@ dataset.rename(columns={'state': 'status'}, inplace=True)
 
 #save CSV File 
 dataset.to_csv('Kickstarter Campaigns DataSet.csv')
-
